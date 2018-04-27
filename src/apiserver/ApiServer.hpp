@@ -2,6 +2,7 @@
 #define WORKERPLEX_APISERVER_HPP
 
 #include <string>
+#include <map>
 #include <restbed>
 #include "workerplex/Workerplex.hpp"
 

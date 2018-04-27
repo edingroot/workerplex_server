@@ -1,7 +1,12 @@
 #include "RequestParser.hpp"
+#include <cstdio>
 #include <restbed>
 #include <boost/algorithm/string.hpp>
-#include <cstdio>
+
+// Added for handing json
+#define BOOST_SPIRIT_THREADSAFE
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 map<string, string> RequestParser::parseFormUrlEncoded(string body) {
     map<string, string> data;
@@ -19,4 +24,31 @@ map<string, string> RequestParser::parseFormUrlEncoded(string body) {
     }
 
     return data;
+}
+
+vector<string> RequestParser::parseArgsArray(string arrayString) {
+    vector<string> args;
+
+    try {
+        using namespace boost::property_tree;
+        stringstream ss;
+        ptree pt;
+
+        ss << "{\"a\":" << arrayString << "}";
+        read_json(ss, pt);
+
+        for (boost::property_tree::ptree::value_type &v : pt.get_child("a")) {
+            // Array elements should have no names
+            if (v.first.empty()) {
+                args.emplace_back(v.second.data());
+            } else {
+                break;
+            }
+        }
+
+    } catch (exception const& e) {
+        cerr << "[RequestParser::parseArgsArray] " << e.what() << endl;
+    }
+
+    return args;
 }

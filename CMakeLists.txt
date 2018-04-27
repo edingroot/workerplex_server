@@ -4,15 +4,13 @@ project(workerplex_server)
 # Use C++14
 set(CMAKE_CXX_STANDARD 14)
 
-# workerplex library
+# third_party
+set(THIRD_PARTY_INCLUDES third_party/workerplex/lib)
 add_subdirectory(third_party/workerplex/lib)
 
 # Boost library
 find_package(Boost 1.58.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
-
-set(THIRD_PARTY_INCLUDES
-        third_party/workerplex/lib)
 
 set(SOURCE_FILES
         src/main.cpp
