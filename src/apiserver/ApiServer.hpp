@@ -12,7 +12,7 @@ class ApiServer {
 public:
     ApiServer(const string &listenAddress, uint16_t listenPort);
 
-    void attachWorkerplex(Workerplex &workerplex);
+    bool attachWorkerplex(Workerplex &workerplex);
 
     void start();
 
@@ -21,14 +21,15 @@ public:
     virtual ~ApiServer();
 
 private:
+    const string listenAddress;
+    const uint16_t listenPort;
+    bool started = false;
+
     Service service;
     shared_ptr<Settings> settings;
     Workerplex workerplex;
 
-    const string listenAddress;
-    const uint16_t listenPort;
-
-    void registerStaticRoutes();
+    bool registerStaticRoutes();
 
 };
 
