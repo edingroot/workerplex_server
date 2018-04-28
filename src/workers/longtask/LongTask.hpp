@@ -2,8 +2,9 @@
 #define WORKERPLEX_LONGTASK_HPP
 
 #include <string>
-#include <vector>
 #include "workerplex/Worker.hpp"
+
+using namespace std;
 
 class LongTask : public Worker {
 public:
@@ -11,7 +12,7 @@ public:
 
     string getIdentifier() override;
 
-    void run(const vector<string> &args) override;
+    string run(const vector<string> &args) override;
 
 };
 

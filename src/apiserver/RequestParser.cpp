@@ -1,5 +1,6 @@
 #include "RequestParser.hpp"
 #include <cstdio>
+#include <sstream>
 #include <restbed>
 #include <boost/algorithm/string.hpp>
 

@@ -1,4 +1,5 @@
 #include "PingPong.hpp"
+#include <iostream>
 
 const string PingPong::IDENTIFIER = "ping";
 
@@ -6,6 +7,6 @@ string PingPong::getIdentifier() {
     return IDENTIFIER;
 }
 
-void PingPong::run(const vector<string> &args) {
-    cout << "pong" << endl;
+string PingPong::run(const vector<string> &args) {
+    return "pong";
 }
