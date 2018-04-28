@@ -1,3 +1,6 @@
-[submodule "third_party/workerplex"]
-	path = third_party/workerplex
+[submodule "lib/wplexserver/third_party/workerplex"]
+	path = lib/wplexserver/third_party/workerplex
+	url = https://github.com/edingroot/workerplex.git
+[submodule "library/wplexserver/third_party/workerplex"]
+	path = library/wplexserver/third_party/workerplex
 	url = https://github.com/edingroot/workerplex.git

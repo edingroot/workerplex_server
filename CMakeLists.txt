@@ -1,28 +1,25 @@
-cmake_minimum_required(VERSION 3.8)
-project(workerplex_server)
-
-# Use C++14
-set(CMAKE_CXX_STANDARD 14)
+cmake_minimum_required(VERSION 3.5)
+project(wplexserver-demo)
 
 # third_party
-set(THIRD_PARTY_INCLUDES third_party/workerplex/lib)
-add_subdirectory(third_party/workerplex/lib)
+add_subdirectory(library)
+include_directories(library/wplexserver/third_party/workerplex/library)
 
 # Boost library
 find_package(Boost 1.58.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-set(SOURCE_FILES
-        src/main.cpp
-        src/apiserver/ApiServer.hpp
-        src/apiserver/ApiServer.cpp
-        src/apiserver/RequestParser.cpp
-        src/apiserver/RequestParser.hpp
-        src/workers/pingpong/PingPong.hpp
-        src/workers/pingpong/PingPong.cpp
-        src/workers/longtask/LongTask.hpp
-        src/workers/longtask/LongTask.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+# If this is not a sub-project
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
+    set(CMAKE_CXX_STANDARD 14)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${THIRD_PARTY_INCLUDES})
-target_link_libraries(${PROJECT_NAME} workerplex restbed ${Boost_LIBRARIES})
+    set(SOURCE_FILES
+            src/main.cpp
+            src/workers/pingpong/PingPong.hpp
+            src/workers/pingpong/PingPong.cpp
+            src/workers/longtask/LongTask.hpp
+            src/workers/longtask/LongTask.cpp)
+    add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+    target_include_directories(${PROJECT_NAME} PRIVATE library)
+    target_link_libraries(${PROJECT_NAME} wplexserver restbed ${Boost_LIBRARIES})
+endif()

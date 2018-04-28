@@ -2,7 +2,7 @@
 #include <cstring>
 #include <cstdint>
 #include <iostream>
-#include "apiserver/ApiServer.hpp"
+#include "wplexserver/ApiServer.hpp"
 #include "workerplex/Workerplex.hpp"
 #include "workers/pingpong/PingPong.hpp"
 #include "workers/longtask/LongTask.hpp"
