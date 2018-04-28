@@ -7,11 +7,12 @@ all: build run
 
 build:
 	docker build -t wplexserver \
-				--build-arg port=${PORT} \
+				 --build-arg port=${PORT} \
 				 -f Dockerfile ${SRC}
 
 run:
 	docker run -d --name wplexserver_1 \
+			   --restart unless-stopped \
 			   -p 8080:8080 wplexserver
 
 clean:
